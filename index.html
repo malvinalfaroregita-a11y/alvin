@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HPP Produk Mie</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #fff1d6, #ffd59a);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff8c00, #ffb300);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .icon {
+            font-size: 55px;
+        }
+
+        .header h1 {
+            margin: 10px 0 5px;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
+
+        .full {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #ff9800;
+            box-shadow: 0 0 5px rgba(255,152,0,0.2);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff8c00, #ffb300);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px rgba(255,140,0,0.3);
+        }
+
+        .reset {
+            background: #555;
+            margin-top: 10px;
+        }
+
+        .hasil {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            background: #fff8ed;
+            border: 2px solid #ffe0b2;
+            display: none;
+        }
+
+        .hasil h2 {
+            margin-top: 0;
+            color: #e87500;
+        }
+
+        .data {
+            display: flex;
+            justify-content: space-between;
+            padding: 11px 0;
+            border-bottom: 1px solid #eee;
+            gap: 20px;
+        }
+
+        .total {
+            margin-top: 15px;
+            padding: 18px;
+            border-radius: 12px;
+            background: #ff9800;
+            color: white;
+            text-align: center;
+        }
+
+        .total small {
+            display: block;
+            font-size: 14px;
+        }
+
+        .total strong {
+            display: block;
+            font-size: 28px;
+            margin-top: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 18px;
+            color: #777;
+            font-size: 13px;
+            background: #fafafa;
+        }
+
+        .footer strong {
+            color: #e87500;
+            display: block;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: span 1;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .data {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="icon">🍜</div>
+
+        <h1>HPP Produk Mie</h1>
+
+        <p>
+            Aplikasi Perhitungan Harga Pokok Penjualan
+        </p>
+    </div>
+
+    <div class="content">
+
+        <div class="form-grid">
+
+            <div class="form-group full">
+                <label>Nama Produk</label>
+
+                <input
+                    type="text"
+                    id="produk"
+                    placeholder="Contoh: Mie Ayam"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Biaya Bahan Baku (Rp)</label>
+
+                <input
+                    type="number"
+                    id="bahan"
+                    placeholder="Contoh: 50000"
+                    min="0"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Biaya Tenaga Kerja (Rp)</label>
+
+                <input
+                    type="number"
+                    id="tenaga"
+                    placeholder="Contoh: 30000"
+                    min="0"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Biaya Overhead (Rp)</label>
+
+                <input
+                    type="number"
+                    id="overhead"
+                    placeholder="Contoh: 20000"
+                    min="0"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Jumlah Produk (pcs)</label>
+
+                <input
+                    type="number"
+                    id="jumlah"
+                    placeholder="Contoh: 20"
+                    min="1"
+                >
+            </div>
+
+        </div>
+
+        <button onclick="hitungHPP()">
+            🧮 HITUNG HPP
+        </button>
+
+        <button class="reset" onclick="resetForm()">
+            🔄 RESET
+        </button>
+
+
+        <div class="hasil" id="hasil">
+
+            <h2>📊 Hasil Perhitungan</h2>
+
+            <div class="data">
+                <span>Nama Produk</span>
+                <strong id="hasilProduk"></strong>
+            </div>
+
+            <div class="data">
+                <span>Biaya Bahan Baku</span>
+                <strong id="hasilBahan"></strong>
+            </div>
+
+            <div class="data">
+                <span>Biaya Tenaga Kerja</span>
+                <strong id="hasilTenaga"></strong>
+            </div>
+
+            <div class="data">
+                <span>Biaya Overhead</span>
+                <strong id="hasilOverhead"></strong>
+            </div>
+
+            <div class="data">
+                <span>Total Biaya Produksi</span>
+                <strong id="hasilTotal"></strong>
+            </div>
+
+            <div class="data">
+                <span>Jumlah Produk</span>
+                <strong id="hasilJumlah"></strong>
+            </div>
+
+            <div class="total">
+
+                <small>
+                    HARGA POKOK PENJUALAN PER PRODUK
+                </small>
+
+                <strong id="hasilHPP"></strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+
+        Aplikasi HPP Produk Mie • GitHub Pages
+
+        <strong>
+            Dibuat oleh Muhammad Alvin Alfaro Regita
+        </strong>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function rupiah(angka) {
+
+    return "Rp " + angka.toLocaleString(
+        "id-ID"
+    );
+
+}
+
+
+function hitungHPP() {
+
+    const produk =
+        document.getElementById("produk").value.trim();
+
+    const bahan =
+        Number(document.getElementById("bahan").value);
+
+    const tenaga =
+        Number(document.getElementById("tenaga").value);
+
+    const overhead =
+        Number(document.getElementById("overhead").value);
+
+    const jumlah =
+        Number(document.getElementById("jumlah").value);
+
+
+    if (
+        produk === "" ||
+        bahan < 0 ||
+        tenaga < 0 ||
+        overhead < 0 ||
+        jumlah <= 0
+    ) {
+
+        alert(
+            "Silakan isi semua data dengan benar!"
+        );
+
+        return;
+    }
+
+
+    // Total biaya produksi
+
+    const total =
+        bahan + tenaga + overhead;
+
+
+    // HPP per produk
+
+    const hpp =
+        total / jumlah;
+
+
+    // Menampilkan hasil
+
+    document.getElementById(
+        "hasilProduk"
+    ).textContent = produk;
+
+
+    document.getElementById(
+        "hasilBahan"
+    ).textContent = rupiah(bahan);
+
+
+    document.getElementById(
+        "hasilTenaga"
+    ).textContent = rupiah(tenaga);
+
+
+    document.getElementById(
+        "hasilOverhead"
+    ).textContent = rupiah(overhead);
+
+
+    document.getElementById(
+        "hasilTotal"
+    ).textContent = rupiah(total);
+
+
+    document.getElementById(
+        "hasilJumlah"
+    ).textContent = jumlah + " pcs";
+
+
+    document.getElementById(
+        "hasilHPP"
+    ).textContent = rupiah(
+        Math.round(hpp)
+    );
+
+
+    // Menampilkan kotak hasil
+
+    document.getElementById(
+        "hasil"
+    ).style.display = "block";
+
+}
+
+
+function resetForm() {
+
+    document.getElementById(
+        "produk"
+    ).value = "";
+
+    document.getElementById(
+        "bahan"
+    ).value = "";
+
+    document.getElementById(
+        "tenaga"
+    ).value = "";
+
+    document.getElementById(
+        "overhead"
+    ).value = "";
+
+    document.getElementById(
+        "jumlah"
+    ).value = "";
+
+
+    document.getElementById(
+        "hasil"
+    ).style.display = "none";
+
+}
+
+</script>
+
+</body>
+</html>
